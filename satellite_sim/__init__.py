@@ -1,7 +1,7 @@
 """
 LEO Satellite Command Link Security Simulator
 
-A production-grade simulation environment for modeling spacecraft command link 
+A production-grade simulation environment for modeling spacecraft command link
 security scenarios, including CCSDS packet processing, HMAC-SHA256 authentication,
 and intrusion detection.
 """

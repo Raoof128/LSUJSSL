@@ -4,14 +4,16 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class HMACSigner:
     """
     Handles HMAC-SHA256 signing of data.
     """
+
     def __init__(self, secret_key: bytes):
         """
         Initialize the signer with a secret key.
-        
+
         Args:
             secret_key (bytes): The shared secret key for signing.
         """
@@ -20,10 +22,10 @@ class HMACSigner:
     def sign(self, data: bytes) -> bytes:
         """
         Compute the HMAC-SHA256 signature for the given data.
-        
+
         Args:
             data (bytes): The data to sign.
-            
+
         Returns:
             bytes: The computed HMAC signature.
         """
