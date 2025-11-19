@@ -1,7 +1,6 @@
 import struct
 import time
 from enum import Enum
-from typing import Optional
 
 
 class PacketType(Enum):

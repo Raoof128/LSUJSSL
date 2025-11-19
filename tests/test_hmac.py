@@ -12,7 +12,7 @@ def test_hmac_signing_and_verification():
     signature = signer.sign(data)
 
     assert len(signature) == 32  # SHA256 is 32 bytes
-    assert verifier.verify(data, signature) == True
+    assert verifier.verify(data, signature) is True
 
 
 def test_hmac_tampering():
@@ -25,8 +25,8 @@ def test_hmac_tampering():
 
     # Tamper with data
     tampered_data = b"Hello Hacker"
-    assert verifier.verify(tampered_data, signature) == False
+    assert verifier.verify(tampered_data, signature) is False
 
     # Tamper with signature
     tampered_sig = signature[:-1] + b"\x00"
-    assert verifier.verify(data, tampered_sig) == False
+    assert verifier.verify(data, tampered_sig) is False

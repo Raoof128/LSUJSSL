@@ -9,10 +9,19 @@ exclude =
     build,
     dist,
     *.egg-info
+
+# Ignore codes:
+# E203 - whitespace before ':'
+# W503 - line break before binary operator
+# E501 - line too long (handled by black)
 ignore =
-    E203,  # whitespace before ':'
-    W503,  # line break before binary operator
-    E501,  # line too long (handled by black)
+    E203,
+    W503,
+    E501
+
 per-file-ignores =
     __init__.py:F401
+    tests/*.py:F401
+    satellite_sim/satellite/firewall.py:F841
+
 max-complexity = 10

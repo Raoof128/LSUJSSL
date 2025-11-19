@@ -37,7 +37,7 @@ def send(
     """
     Send a command to the satellite from a Ground Station.
     """
-    console.print(f"[bold blue]Initiating Uplink Transmission...[/bold blue]")
+    console.print("[bold blue]Initiating Uplink Transmission...[/bold blue]")
 
     packet = None
 
