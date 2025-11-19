@@ -1,0 +1,71 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                                                                      ║
+║   LEO SATELLITE COMMAND LINK SIMULATION - DEMO OUTPUT               ║
+║                                                                      ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+🛰️  SCENARIO 1: LEGITIMATE GROUND STATION OPERATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Command: ADJUST_THRUST
+Station: STATION_ALPHA (Legitimate)
+Packet Size: 48 bytes (6 header + 8 timestamp + 14 payload + 32 HMAC)
+HMAC Signature: ✅ VALID
+Timestamp: ✅ FRESH
+Result: ✅ COMMAND EXECUTED
+
+Command: UPDATE_ORBIT_PARAMETERS  
+Station: STATION_ALPHA (Legitimate)
+Packet Size: 58 bytes
+HMAC Signature: ✅ VALID
+Timestamp: ✅ FRESH
+Result: ✅ COMMAND EXECUTED
+
+Command: DEPLOY_SOLAR_PANEL
+Station: STATION_ALPHA (Legitimate)
+Packet Size: 52 bytes
+HMAC Signature: ✅ VALID
+Timestamp: ✅ FRESH
+Result: ✅ COMMAND EXECUTED
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  SCENARIO 2: ROGUE STATION ATTACK ATTEMPTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Attack #1: SHUTDOWN_REACTOR
+Station: ROGUE_STATION_X
+Attack Type: BAD_SIGNATURE (Random bytes appended)
+HMAC Signature: ❌ INVALID (Expected: f837a9c6..., Got: cf322996...)
+Result: ❌ REJECTED - SECURITY_VIOLATION logged
+
+Attack #2: DISABLE_ATTITUDE_CONTROL
+Station: ROGUE_STATION_X
+Attack Type: NO_SIGNATURE
+HMAC Signature: ❌ INVALID
+Result: ❌ REJECTED - SECURITY_VIOLATION logged
+
+Attack #3: CHANGE_ORBIT
+Station: ROGUE_STATION_X
+Attack Type: SHORT_SIGNATURE (Only 10 bytes)
+Packet Size: 36 bytes (too short)
+Result: ❌ REJECTED - PACKET_REJECTED (Packet too short)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 FINAL STATISTICS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Accepted Commands:     3 / 3 (100%)
+❌ Rejected Attacks:      3 / 3 (100%)
+🛡️ Defense Effectiveness: 100%
+
+Security Events:
+  - COMMAND_EXECUTED:     3 events
+  - SECURITY_VIOLATION:   2 events (CRITICAL)
+  - PACKET_REJECTED:      1 event  (HIGH)
+
+All intrusion attempts were successfully detected and blocked.
+The Space Firewall is functioning correctly. ✅
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
